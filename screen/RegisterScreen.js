@@ -7,7 +7,7 @@ import {
   TextInput,
   Image
 } from "react-native";
-import { FormLabel, FromInput } from "react-native-elements";
+import { FormLabel, FormInput, Button } from "react-native-elements";
 import styleImage from "../style";
 var logo = require("../img/google.png");
 
@@ -18,7 +18,21 @@ class RegisterScreen extends Component {
         <View style={styles.body}>
           <View style={styleImage.viewContainer}>
             <Image source={logo} style={styleImage.logo} />
-            {console.log(styleImage.logo)}
+          </View>
+          <View>
+            <FormLabel> Enter Email</FormLabel>
+            <FormInput placeholder="Type your email." keyboardType="default" />
+          </View>
+          <View style={{ marginTop: 15 }}>
+            <FormLabel> Enter Password</FormLabel>
+            <FormInput
+              secureTextEntry={true}
+              placeholder="Type your password."
+              keyboardType="default"
+            />
+          </View>
+          <View style={{ marginTop: 50 }}>
+            <Button title="Register" backgroundColor="blue" />
           </View>
         </View>
       </View>
@@ -29,12 +43,10 @@ class RegisterScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    // justifyContent: "center"
-    alignItems: "center"
+    backgroundColor: "#fff"
   },
   body: {
-    marginTop: Platform.OS === "ios" ? 20 : 0
+    marginTop: Platform.OS === "ios" ? 0 : 0
   }
 });
 
