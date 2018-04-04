@@ -1,53 +1,71 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Platform,
-  Text,
-  View,
-  TextInput,
-  Image
-} from "react-native";
+import { View, Image, Animated, Keyboard, KeyboardAvoidingView } from "react-native";
 import { FormLabel, FormInput, Button } from "react-native-elements";
-import styleImage from "../style";
-var logo = require("../img/google.png");
+import styles, { IMAGE_HEIGHT, IMAGE_HEIGHT_SMALL } from '../style';
+var logo = require("../img/react-native.jpg");
 
 class RegisterScreen extends Component {
+
+  constructor(props) {
+    super(props);
+    this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
+  }
+
+  componentWillMount () {
+    this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+    this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+  }
+
+  componentWillUnmount() {
+    this.keyboardWillShowSub.remove();
+    this.keyboardWillHideSub.remove();
+  }
+
+  keyboardWillShow = (event) => {
+    Animated.timing(this.imageHeight, {
+      duration: event.duration,
+      toValue: IMAGE_HEIGHT_SMALL,
+    }).start();
+  };
+
+  keyboardWillHide = (event) => {
+    Animated.timing(this.imageHeight, {
+      duration: event.duration,
+      toValue: IMAGE_HEIGHT,
+    }).start();
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.body}>
-          <View style={styleImage.viewContainer}>
-            <Image source={logo} style={styleImage.logo} />
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior="padding"
+        >
+          <View style={styles.body}>
+            <View style={styles.viewContainer}>
+              <Animated.Image source={logo} style={[styles.logo, { height: this.imageHeight }]} />
+            </View>
+            <View>
+              <FormLabel> Enter Email</FormLabel>
+              <FormInput placeholder="Type your email." keyboardType="default" />
+            </View>
+            <View style={{ marginTop: 15 }}>
+              <FormLabel> Enter Password</FormLabel>
+              <FormInput
+                secureTextEntry={true}
+                placeholder="Type your password."
+                keyboardType="default"
+              />
+            </View>
+            <View style={{ marginTop: 50 }}>
+              <Button title="Register" backgroundColor="blue" />
+            </View>
           </View>
-          <View>
-            <FormLabel> Enter Email</FormLabel>
-            <FormInput placeholder="Type your email." keyboardType="default" />
-          </View>
-          <View style={{ marginTop: 15 }}>
-            <FormLabel> Enter Password</FormLabel>
-            <FormInput
-              secureTextEntry={true}
-              placeholder="Type your password."
-              keyboardType="default"
-            />
-          </View>
-          <View style={{ marginTop: 50 }}>
-            <Button title="Register" backgroundColor="blue" />
-          </View>
-        </View>
+        </KeyboardAvoidingView>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff"
-  },
-  body: {
-    marginTop: Platform.OS === "ios" ? 0 : 0
-  }
-});
 
 export default RegisterScreen;
