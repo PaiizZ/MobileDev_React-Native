@@ -8,70 +8,45 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native";
-import FirstClassScreen from "./screen/FirstClassScreen";
-import RegisterScreen from "./screen/RegisterScreen";
-import LandingScreen from "./screen/LandingScreen"
-
+import FirstClassScreen from "../MobileApp/screen/FirstClassScreen";
+import RegisterScreen from "../MobileApp/screen/RegisterScreen";
+import LandingScreen from "../MobileApp/screen/LandingScreen";
+import ShowScreen from "../MobileApp/screen/ShowScreen"
+import HomeScreen from "../MobileApp/screen/HomeScreen"
+import { Button } from "react-native-elements";
+import styles from '../MobileApp/style';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text1: "",
-      text2: "Please input a text"
+       currentScreen: ''
     };
   }
 
-  handleChangeText(text) {
-    this.setState({ text1: text });
+  switchScreen(screen) {
+    this.setState({ currentScreen: screen });
   }
 
-  setTitle() {
-    this.setState({ text2: this.state.text1 });
+  renderScreen() {
+    switch(this.state.currentScreen){
+      case 'firstclass':
+      return( <FirstClassScreen switchScreen={(screen) => this.switchScreen(screen)}/>)
+      case 'register':
+      return( <RegisterScreen switchScreen={(screen) => this.switchScreen(screen)}/>)
+      case 'landing':
+      return( <LandingScreen switchScreen={(screen) => this.switchScreen(screen)}/>)
+      case 'show':
+      return( <ShowScreen switchScreen={(screen) => this.switchScreen(screen)}/>)
+      default:
+      return( <HomeScreen switchScreen={(screen) => this.switchScreen(screen)}/>)
+    }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        {/* <FirstClassScreen/> */}
-        {/* <RegisterScreen /> */}
-        <LandingScreen/>
+        {this.renderScreen()}
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff"
-  },
-  body: {
-    marginTop: Platform.OS === "ios" ? 25 : 0
-  },
-  label: {
-    color: "#5C5C5C",
-    fontSize: 15,
-    fontWeight: "bold"
-  },
-  textBox: {
-    flex: 1,
-    height: 42,
-    borderRadius: 3,
-    justifyContent: "center",
-    backgroundColor: "#FFF",
-    paddingHorizontal: 15,
-    marginLeft: 15,
-    marginRight: 15,
-    marginTop: 10,
-    marginBottom: 10,
-    borderColor: "#dfdfdf",
-    borderWidth: 1
-  },
-  textInput: {
-    flex: 1,
-    color: "#000",
-    fontSize: 15,
-    height: 35,
-    padding: 0
-  }
-});

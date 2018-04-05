@@ -8,6 +8,8 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native";
+import { Button } from "react-native-elements";
+var logo = require("../img/react-native.jpg");
 
 export default class FirstClassScreen extends Component {
   constructor(props) {
@@ -39,7 +41,7 @@ export default class FirstClassScreen extends Component {
           >
             <Image
               style={{ width: 300, height: 180, resizeMode: "cover" }}
-              source={require("../assets/react-native.jpeg")}
+              source={logo}
             />
           </View>
 
@@ -85,6 +87,7 @@ export default class FirstClassScreen extends Component {
           >
             <Text style={styles.label}>{this.state.text1}</Text>
           </View>
+          <Button style={{ marginTop: 30 }} title="Go to Home Screen" onPress={() => this.props.switchScreen('home')}></Button>
         </View>
       </View>
     );

@@ -63,6 +63,7 @@ class RegisterScreen extends Component {
             </View>
           </View>
         </KeyboardAvoidingView>
+        <Button style={{ marginTop: 30 }} title="Go to Home Screen" onPress={() => this.props.switchScreen('home')}></Button>
       </View>
     );
   }
