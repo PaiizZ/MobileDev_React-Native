@@ -8,8 +8,9 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native";
+import FirstClassScreen from "./screen/FirstClassScreen";
 import RegisterScreen from "./screen/RegisterScreen";
-import WelcomeScreen from "./screen/WelcomeScreen";
+import LandingScreen from "./screen/LandingScreen"
 
 export default class App extends React.Component {
   constructor(props) {
@@ -31,65 +32,9 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <WelcomeScreen /> */}
-        <RegisterScreen />
-        {/* <View style={styles.body}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Image
-              style={{ width: 300, height: 180, resizeMode: "cover" }}
-              source={require("./assets/react-native.jpeg")}
-            />
-          </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: 15
-            }}
-          >
-            <Text style={styles.label}>{this.state.text2}</Text>
-          </View>
-
-          <View style={{ flexDirection: "row" }}>
-            <View style={styles.textBox}>
-              <TextInput
-                style={styles.textInput}
-                value={this.state.text1}
-                underlineColorAndroid="transparent"
-                onChangeText={text => this.handleChangeText(text)}
-              />
-            </View>
-            <TouchableOpacity
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                marginRight: 15
-              }}
-              onPress={() => this.setTitle()}
-            >
-              <Text style={styles.label}>Save</Text>
-            </TouchableOpacity>
-          </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: 15
-            }}
-          >
-            <Text style={styles.label}>{this.state.text1}</Text>
-          </View>
-        </View> */}
+        {/* <FirstClassScreen/> */}
+        {/* <RegisterScreen /> */}
+        <LandingScreen/>
       </View>
     );
   }
